@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CirculareDependencyPlugin = require('circular-dependency-plugin')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const smp = new SpeedMeasurePlugin();
@@ -21,8 +22,9 @@ module.exports = smp.wrap({
               loader: 'babel-loader',
             },
             {
-                test: /\.s[ac]ss$/,
+                test: /\.scss?$/,
                 use: [
+                    
                     'style-loader',
                     'css-loader',
                     'sass-loader'
@@ -46,6 +48,7 @@ module.exports = smp.wrap({
     },
     plugins: [
         new HtmlWebpackPlugin({template: './client/template/index.html'}),
+        new MiniCssExtractPlugin({filename: 'style.[name].css'}),
         new CirculareDependencyPlugin()
     ]
 });

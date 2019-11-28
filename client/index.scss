@@ -1,0 +1,548 @@
+//  colors
+$navBlockColor: #2197ffba;
+$navDropdownBorderColor: #5d85fdb3;
+$numerableBlockNumberColor: #ddefff;
+$lightGrayColor: #fafafa;
+$darkTitleColor: #212121;
+$darkTextColor: #616161;
+
+$lightBlue: #03a9f4;
+$middleBlue: #007ac1;
+$darkBlue: #193d9e;
+$indigo: #666ad1;
+$orange: #ff5f52;
+
+// fonts size
+$bigTitleSize: 60px;
+$middleTitleSize: 42px;
+$textSize: 18px;
+$litleTextSize: 16px;
+
+
+*,
+html, 
+body {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    min-height: 4000px;
+}
+
+h1, h2, h3, h4, h5, h6, span, p, a, div, label {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+h1, h2, h3, span, label {
+    line-height: 1.2;
+    letter-spacing: -.03em;
+    margin: 0 0 8px;
+}
+
+p {
+    line-height: 1.5;
+    margin: 0 0 16px;
+}
+
+a {
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:focus {
+        outline: none;
+        text-decoration: none;
+    }
+}
+
+.section {
+    display: block;
+    padding: 84px 14.5%;
+    padding-bottom: 42px;
+}
+
+.line-block {
+    display: flex;
+    
+    @media only screen and (max-width: 1256px) {
+        flex-direction: row;
+    }
+
+    @media only screen and (max-width: 776px) {
+        flex-direction: column;
+    }
+}
+
+//  common title 
+.title {
+
+    h2 {
+        font-size: $bigTitleSize;
+    }
+
+    p {
+        font-size: $textSize;
+    }
+
+    &.bg-dark {
+        color: $lightGrayColor;
+    }
+
+    &.bg-white {
+        color: $darkTitleColor;
+    }
+}
+
+.descriptor {
+
+    p {
+        font-size: $textSize;
+    }
+
+    &.bg-dark {
+        color: $lightGrayColor;
+    }
+
+    &.bg-white {
+        color: $darkTextColor;
+    }
+}
+
+//  set for element of the absolute position
+.absolute {
+    position: absolute;
+}
+
+//  set element to full screen, if his position absolute
+.full-screen {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+// position of the main blocks
+.root-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    // header position
+    .header {
+        flex: 0 0 auto;
+    }
+
+    // content position
+    .content {
+        flex: 1 0 auto;
+    }
+
+    //  footer position
+    .footer {
+        flex: 0 0 auto;
+    }
+}
+
+//  header elements style
+.header {
+    display: block;
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+    margin-top: 4%;
+
+    transition: margin .3s ease, background-color .3s ease;
+
+    a {
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 18px;
+        letter-spacing: -.03em;
+        color: white;
+    }
+
+    //  navigation panel
+    .nav-list {
+        display: block;
+        float: left;
+        margin-left: 72px;
+        
+        //  the elements of navigation panel
+        & > li {
+            position: relative;
+            display: inline-block;
+            padding: 25px 15px;
+            padding-top: 15px;
+
+            transition: padding .3s ease;
+
+            &:before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 0px;
+                height: 2px;
+                background-color: $navBlockColor;
+
+                transition: width .3s ease;
+            }
+
+            &:hover {
+
+                &:before {
+                    width: 100%;
+                }
+
+                & > .nav-dropdown {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+        }
+
+        // style of the dropdown block and his elements
+        .nav-dropdown {
+            position: absolute;
+            visibility: hidden;
+            opacity: 0;
+            top: 100%;
+            right: 0;
+
+            transition: opacity .3s ease;
+
+            li {
+                position: relative;
+                display: block;
+                text-align: right;
+                margin-bottom: 15px;
+                padding-right: 15px;
+
+                &:before {
+                    content: "";
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    width: 2px;
+                    height: 0;
+                    background-color: $navBlockColor;
+                    
+                    transition: height .3s ease;
+                }
+
+                &:hover {
+                    
+                    &:before {
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+    &.scrolling {
+        margin-top: 0;
+        background-color: #1f95ffbd;
+
+        .nav-list > li {
+            padding-top: 25px;
+        }
+    }
+}
+
+.page-container {
+
+    .top-container {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        height: 717px;
+
+        .bg-img {
+            background-image: url("../public/images/h-img.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            z-index: -1;
+        }
+
+        .title {
+            position: absolute;
+            right: 3.5%;
+            bottom: 7%;
+            text-align: right;
+
+            h2 {
+                font-size: 72px;
+            }
+
+            h2:first-child {
+                font-size: 28px;
+            }
+        }
+
+        .btn-down {
+            position: relative;
+            display: block;
+            align-self: flex-end;
+            margin: 1.5% auto;
+            text-align: center;
+            background-color: transparent;
+            border: 0;
+            cursor: pointer;
+
+            &::-moz-focus-inner {
+                border: 0;
+            }
+
+            svg {
+                display: block;
+                transform: rotateZ(270deg);
+                height: 37px;
+                width: 37px;
+                color: white;
+            }
+
+            &:before, &:after {
+                animation-name: down-anim;
+                animation-duration: 2.5s;
+                animation-timing-function: ease-in-out;
+                animation-iteration-count: infinite;
+            }
+
+            &:before, &:after {
+                content: "";
+                display: block;
+                position: absolute;
+                border: 1px solid white;
+                border-radius: 100%;
+                width: 45px;
+                height: 45px;
+                right: -14%;
+                z-index: -1;
+            }
+
+            &:before {
+                animation-delay: .5s;
+                border-color: #6b97ffe6;
+            }
+
+            &:after {
+                top: 0;
+                animation-delay: 0s;
+                border-color: #6b97ff;
+            }
+        }
+    }
+}
+
+.link {
+
+    display: inline-block;
+    margin-bottom: 42px;
+
+    transition: background-color .3s ease;
+
+    &:hover {
+        background-color: $middleBlue;
+    }
+    
+    &.contained {
+        
+        border-radius: 5px;
+        border: 0;
+
+        a {
+            display: block;
+            color: white;
+            padding: 15px 25px;
+            cursor: pointer;
+
+            span {
+                letter-spacing: .1em;
+                text-transform: uppercase;
+                font-size: 14px
+            }
+        }
+    }
+
+    &.outlined {
+
+        border: 1px solid #d9d5d5;
+        
+        a {
+            color: #03a9f4;
+            padding: 6.5px 16px;
+
+            span {
+                letter-spacing: .1em;
+                text-transform: uppercase;
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+.lblue {
+    background-color: $lightBlue;
+}
+
+.mblue {
+    background-color: $middleBlue;
+}
+
+.dblue {
+    background-color: $darkBlue;
+}
+
+.indigo {
+    background-color: $indigo;
+}
+
+.orange {
+    background-color: $orange;
+}
+
+.numerable-block {
+
+    border: 1px solid #b6ddff;
+    border-radius: 3px;
+    margin-right: 72px;
+    padding: 10px 32px;
+    padding-left: 0;
+
+    box-shadow: 0 1px 3px rgba(0,0,0,0), 0 1px 2px rgba(0,0,0,0);
+  	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+  	&:hover {
+  		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+ 	}
+
+    ul {
+        list-style-type: none;
+
+        li {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 16px;
+            overflow: hidden;
+
+            span {
+                white-space: nowrap;
+                color: $darkTextColor;
+                font-size: $textSize;
+
+                &:first-child {
+                    color: $numerableBlockNumberColor;
+                    font-size: 117px;
+                    font-weight: 700;
+                    margin-left: -30px;
+                    margin-right: 42px;
+                    user-select: none;
+                }
+            }
+        }
+    }
+}
+
+.about {
+    max-width: 73%;
+    margin-bottom: 42px;
+}
+
+.mdc-s-1 {
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+  	&:hover {
+  		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
+ 	}
+}
+
+.mdc-s-2 {
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.mdc-s-3 {
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.mdc-s-4 {
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.mdc-s-5 {
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+@keyframes down-anim {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: .5
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
+.diagram {
+    position: relative;
+    width: 640px;
+    height: 545px;
+    
+    hr {
+        position: absolute;
+    }
+
+    svg {
+        position: absolute;
+        width: 65px;
+        height: 65px;
+        cursor: pointer;
+
+        &#svg-main {
+            top: 42.3%;
+            left: 33.7%;
+        }
+
+        &#svg-elem-1 {
+            top: 19.5%;
+            left: 14.5%;
+        }
+
+        &#svg-elem-2 {
+            top: 26.4%;
+            left: 42.1%;
+        }
+
+        &#svg-elem-3 {
+            top: 42.6%;
+            left: 63.6%;
+        }
+
+        &#svg-elem-4 {
+            top: 62.3%;
+            left: 45.7%;
+        }
+
+        &#svg-elem-5 {
+            top: 73.1%;
+            left: 23.6%;
+        }
+
+        &#svg-elem-6 {
+            top: 48.8%;
+            left: 14.2%;
+        }
+    }
+}
